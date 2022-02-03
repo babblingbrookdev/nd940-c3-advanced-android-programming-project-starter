@@ -11,4 +11,7 @@
     <string name="button_name">Click me</string>
     <string name="button_loading">We are loading </string>
     <string name="title_activity_detail">DetailActivity</string>
+    <string name="glide_selection_text">Glide - Image loading library by Bumptech</string>
+    <string name="loadapp_selection_text">Load App - Current repository by Udacity</string>
+    <string name="retrofit_selection_text">Retrofit - Type-safe HTTP client for Android and Java by Square, Inc</string>
 </resources>

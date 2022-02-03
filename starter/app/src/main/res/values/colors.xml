@@ -6,6 +6,6 @@
     <color name="white">#FFFFFF</color>
     <color name="default_button_text_color">#CCFFFFFF</color>
     <color name="default_button_background_color">@color/colorAccent</color>
-    <color name="default_button_progress_color">@color/colorPrimary</color>
+    <color name="default_button_progress_color">@color/colorPrimaryDark</color>
     <color name="default_button_circle_color">@color/design_default_color_surface</color>
 </resources>

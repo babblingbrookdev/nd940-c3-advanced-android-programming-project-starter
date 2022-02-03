@@ -116,7 +116,7 @@ class LoadingButton @JvmOverloads constructor(
                 height.toFloat() / 2f - arcRadius,
                 width.toFloat() - arcMarginRight,
                 height.toFloat() / 2f + arcRadius,
-                90f,
+                270f,
                 360f * buttonProgress,
                 true,
                 paint
