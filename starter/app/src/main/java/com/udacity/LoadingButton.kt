@@ -8,7 +8,6 @@ import android.graphics.Paint
 import android.graphics.Typeface
 import android.util.AttributeSet
 import android.view.View
-import androidx.core.content.withStyledAttributes
 import kotlin.properties.Delegates
 
 private const val PROGRESS = "progress"
@@ -29,6 +28,7 @@ class LoadingButton @JvmOverloads constructor(
     private var buttonBackgroundColor = context.getColor(R.color.default_button_background_color)
     private var buttonCircleColor = context.getColor(R.color.default_button_circle_color)
     private var buttonProgressColor = context.getColor(R.color.default_button_progress_color)
+    private var buttonCompleteColor = context.getColor(R.color.default_button_complete_color)
 
     private val valueAnimator = ValueAnimator()
 
@@ -40,9 +40,12 @@ class LoadingButton @JvmOverloads constructor(
         typeface = Typeface.create("", Typeface.BOLD)
     }
 
-    private var buttonState: ButtonState by Delegates.observable(ButtonState.Completed) { _, old, new ->
+    private var buttonState: ButtonState by Delegates.observable(ButtonState.Initial) { _, old, new ->
         if (old == new) return@observable
         when (new) {
+            ButtonState.Initial -> {
+                // initial state
+            }
             ButtonState.Clicked -> {
                 buttonProgress = 0f
                 valueAnimator.cancel()
@@ -67,6 +70,7 @@ class LoadingButton @JvmOverloads constructor(
                     getColor(R.styleable.LoadingButton_buttonBackgroundColor, buttonBackgroundColor)
                 buttonProgressColor =
                     getColor(R.styleable.LoadingButton_buttonProgressColor, buttonProgressColor)
+                buttonCompleteColor = getColor(R.styleable.LoadingButton_buttonCompleteColor, buttonCompleteColor)
                 buttonCircleColor =
                     getColor(R.styleable.LoadingButton_buttonCircleColor, buttonCircleColor)
                 buttonTextColor =
@@ -89,6 +93,10 @@ class LoadingButton @JvmOverloads constructor(
         if (buttonState == ButtonState.Loading) {
             drawButtonProgress(canvas)
             drawButtonLoadingText(canvas)
+            drawButtonCircle(canvas)
+        } else if (buttonState == ButtonState.Completed) {
+            drawButtonComplete(canvas)
+            drawButtonCompletedText(canvas)
             drawButtonCircle(canvas)
         } else {
             drawInitialText(canvas)
@@ -142,10 +150,25 @@ class LoadingButton @JvmOverloads constructor(
         canvas.drawRect(0f, 0f, buttonProgress * width, height.toFloat(), paint)
     }
 
+    private fun drawButtonComplete(canvas: Canvas) {
+        paint.color = buttonCompleteColor
+        canvas.drawRect(0f, 0f, width.toFloat(), height.toFloat(), paint)
+    }
+
     private fun drawButtonLoadingText(canvas: Canvas) {
         paint.color = buttonTextColor
         canvas.drawText(
             resources.getString(R.string.button_loading),
+            width.toFloat() / 2,
+            (height.toFloat() / 2) - (paint.descent() + paint.ascent() / 2),
+            paint
+        )
+    }
+
+    private fun drawButtonCompletedText(canvas: Canvas) {
+        paint.color = buttonTextColor
+        canvas.drawText(
+            resources.getString(R.string.button_complete),
             width.toFloat() / 2,
             (height.toFloat() / 2) - (paint.descent() + paint.ascent() / 2),
             paint
