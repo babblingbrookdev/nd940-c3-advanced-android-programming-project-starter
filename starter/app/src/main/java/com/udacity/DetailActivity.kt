@@ -1,6 +1,8 @@
 package com.udacity
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.udacity.databinding.ActivityDetailBinding
 
@@ -14,6 +16,10 @@ class DetailActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         setSupportActionBar(binding.toolbar)
-    }
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        binding.detailOkButton.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+        }
+    }
 }

@@ -20,9 +20,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -42,13 +40,12 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="16dp"
                 android:layout_gravity="center"
-                app:tint="@color/design_default_color_surface"
                 android:background="@color/colorPrimaryDark"
-                app:srcCompat="@drawable/ic_baseline_cloud_download_24" />
+                android:padding="16dp"
+                app:srcCompat="@drawable/ic_baseline_cloud_download_24"
+                app:tint="@color/design_default_color_surface" />
         </FrameLayout>
-
 
         <RadioGroup
             android:id="@+id/selection_radio_group"
@@ -67,24 +64,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:textSize="18sp"
-                android:text="@string/glide_selection_text" />
+                android:text="@string/glide_selection_text"
+                android:textSize="18sp" />
 
             <com.google.android.material.radiobutton.MaterialRadioButton
                 android:id="@+id/loadapp_radio_selection"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:textSize="18sp"
-                android:text="@string/loadapp_selection_text" />
+                android:text="@string/loadapp_selection_text"
+                android:textSize="18sp" />
 
             <com.google.android.material.radiobutton.MaterialRadioButton
                 android:id="@+id/retrofit_radio_selection"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:textSize="18sp"
-                android:text="@string/retrofit_selection_text" />
+                android:text="@string/retrofit_selection_text"
+                android:textSize="18sp" />
         </RadioGroup>
 
         <com.udacity.LoadingButton
