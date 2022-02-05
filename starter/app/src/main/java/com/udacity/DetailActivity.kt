@@ -2,7 +2,6 @@ package com.udacity
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.udacity.databinding.ActivityDetailBinding
 
@@ -21,5 +20,11 @@ class DetailActivity : AppCompatActivity() {
         binding.detailOkButton.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
         }
+
+        intent.extras?.let {
+            binding.filenameText.text = it.getString("filename_extra")
+            binding.statusText.text = it.getString("status_extra")
+        }
     }
+
 }

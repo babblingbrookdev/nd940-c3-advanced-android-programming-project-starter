@@ -70,7 +70,8 @@ class LoadingButton @JvmOverloads constructor(
                     getColor(R.styleable.LoadingButton_buttonBackgroundColor, buttonBackgroundColor)
                 buttonProgressColor =
                     getColor(R.styleable.LoadingButton_buttonProgressColor, buttonProgressColor)
-                buttonCompleteColor = getColor(R.styleable.LoadingButton_buttonCompleteColor, buttonCompleteColor)
+                buttonCompleteColor =
+                    getColor(R.styleable.LoadingButton_buttonCompleteColor, buttonCompleteColor)
                 buttonCircleColor =
                     getColor(R.styleable.LoadingButton_buttonCircleColor, buttonCircleColor)
                 buttonTextColor =
