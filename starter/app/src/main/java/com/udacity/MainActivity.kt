@@ -88,9 +88,10 @@ class MainActivity : AppCompatActivity() {
                     val downloadManager = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
                     val query = DownloadManager.Query()
                     query.setFilterById(id)
-                    val cursor = downloadManager.query(query)
-                    if (cursor.moveToFirst()) {
-                        sendNotification(getDownloadStatus(cursor))
+                    downloadManager.query(query).use { cursor ->
+                        if (cursor.moveToFirst()) {
+                            sendNotification(getDownloadStatus(cursor))
+                        }
                     }
                     showSnackbar(getString(R.string.download_completed_message))
                     binding.customButton.onDownloadCompleted()

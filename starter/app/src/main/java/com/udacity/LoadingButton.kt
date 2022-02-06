@@ -12,6 +12,8 @@ import kotlin.properties.Delegates
 
 private const val PROGRESS = "progress"
 private const val ANIMATION_DURATION = 2000L
+private const val BUTTON_ARC_MARGIN = 50f
+private const val BUTTON_ARC_RADIUS = 40f
 
 class LoadingButton @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -19,9 +21,6 @@ class LoadingButton @JvmOverloads constructor(
     private var widthSize = 0
     private var heightSize = 0
     private var buttonProgress = 0f
-
-    private var buttonArcMargin = 50f
-    private var buttonArcRadius = 40f
 
     private var buttonTextSize = context.resources.getDimension(R.dimen.default_button_text_size)
     private var buttonTextColor = context.getColor(R.color.default_button_text_color)
@@ -91,16 +90,18 @@ class LoadingButton @JvmOverloads constructor(
 
         drawInitialBackground(canvas)
 
-        if (buttonState == ButtonState.Loading) {
-            drawButtonProgress(canvas)
-            drawButtonLoadingText(canvas)
-            drawButtonCircle(canvas)
-        } else if (buttonState == ButtonState.Completed) {
-            drawButtonComplete(canvas)
-            drawButtonCompletedText(canvas)
-            drawButtonCircle(canvas)
-        } else {
-            drawInitialText(canvas)
+        when (buttonState) {
+            ButtonState.Loading -> {
+                drawButtonProgress(canvas)
+                drawButtonLoadingText(canvas)
+                drawButtonCircle(canvas)
+            }
+            ButtonState.Completed -> {
+                drawButtonComplete(canvas)
+                drawButtonCompletedText(canvas)
+                drawButtonCircle(canvas)
+            }
+            else -> drawInitialText(canvas)
         }
     }
 
@@ -141,7 +142,7 @@ class LoadingButton @JvmOverloads constructor(
         canvas.drawText(
             resources.getString(R.string.button_name),
             width.toFloat() / 2,
-            (height.toFloat() / 2) - (paint.descent() + paint.ascent() / 2),
+            (height.toFloat() / 2) - ((paint.descent() + paint.ascent()) / 2),
             paint
         )
     }
@@ -161,7 +162,7 @@ class LoadingButton @JvmOverloads constructor(
         canvas.drawText(
             resources.getString(R.string.button_loading),
             width.toFloat() / 2,
-            (height.toFloat() / 2) - (paint.descent() + paint.ascent() / 2),
+            (height.toFloat() / 2) - ((paint.descent() + paint.ascent()) / 2),
             paint
         )
     }
@@ -171,7 +172,7 @@ class LoadingButton @JvmOverloads constructor(
         canvas.drawText(
             resources.getString(R.string.button_complete),
             width.toFloat() / 2,
-            (height.toFloat() / 2) - (paint.descent() + paint.ascent() / 2),
+            (height.toFloat() / 2) - ((paint.descent() + paint.ascent()) / 2),
             paint
         )
     }
@@ -179,10 +180,10 @@ class LoadingButton @JvmOverloads constructor(
     private fun drawButtonCircle(canvas: Canvas) {
         paint.color = buttonCircleColor
         canvas.drawArc(
-            width.toFloat() - buttonArcMargin - (buttonArcRadius * 2),
-            height.toFloat() / 2f - buttonArcRadius,
-            width.toFloat() - buttonArcMargin,
-            height.toFloat() / 2f + buttonArcRadius,
+            width.toFloat() - BUTTON_ARC_MARGIN - (BUTTON_ARC_RADIUS * 2),
+            height.toFloat() / 2f - BUTTON_ARC_RADIUS,
+            width.toFloat() - BUTTON_ARC_MARGIN,
+            height.toFloat() / 2f + BUTTON_ARC_MARGIN,
             270f,
             360f * buttonProgress,
             true,
