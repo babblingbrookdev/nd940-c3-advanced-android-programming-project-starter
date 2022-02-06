@@ -43,7 +43,8 @@ class LoadingButton @JvmOverloads constructor(
         if (old == new) return@observable
         when (new) {
             ButtonState.Initial -> {
-                // initial state
+                buttonProgress = 0f
+                invalidate()
             }
             ButtonState.Clicked -> {
                 buttonProgress = 0f
@@ -199,5 +200,14 @@ class LoadingButton @JvmOverloads constructor(
     fun onDownloadCompleted() {
         isEnabled = true
         buttonState = ButtonState.Completed
+    }
+
+    fun resetButtonState() {
+        isEnabled = true
+        buttonState = ButtonState.Initial
+    }
+
+    fun getCurrentButtonState(): ButtonState {
+        return buttonState
     }
 }

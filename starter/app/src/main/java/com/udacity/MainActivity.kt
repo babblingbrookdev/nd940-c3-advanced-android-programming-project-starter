@@ -49,6 +49,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.selectionRadioGroup.setOnCheckedChangeListener { _, checkedId ->
+            if (binding.customButton.getCurrentButtonState() is ButtonState.Completed) {
+                binding.customButton.resetButtonState()
+            }
             when (checkedId) {
                 R.id.glide_radio_selection -> url = GLIDE_URL
                 R.id.loadapp_radio_selection -> url = LOADAPP_URL
